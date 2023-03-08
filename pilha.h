@@ -58,8 +58,18 @@ int pilha_cheia(PILHA *p){
   }
 }
 
+//ve o tamanho da pilha 
 int tamanho(PILHA *p){
   return p->topo +1;
+}
+
+//ve o ultimo valor da pilha 
+int top(PILHA *p, int *e){
+  if (pilha_vazia(p)){
+    return 0;
+  }
+  *e = p->pilha[p->topo];
+  return 0;
 }
 
 //imprime os valores da pilha
