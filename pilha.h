@@ -10,15 +10,15 @@ typedef struct{
 
 //inciando a pilha...
 void inicializando_pilha (PILHA *p){
-  p->topo = 0;
+  p->topo = -1;
 }
 
 
 //Função empilha
 void empilha(int valor, PILHA *p){
   if(p->topo < MAX_PILHA){
-      p->pilha[p->topo] = valor;
       p->topo++;
+      p->pilha[p->topo] = valor;
   }
   else{
     printf("Nao ha mais espaco na pilha");
@@ -27,7 +27,7 @@ void empilha(int valor, PILHA *p){
 
 //Função desempilha
 void desempilha(PILHA *p){
-  if(p->topo > 0){
+  if(p->topo >= 0){
     p->topo--;
     printf("Elemento retirado: %d\n", p->pilha[p->topo]);
   }
@@ -38,7 +38,7 @@ void desempilha(PILHA *p){
 
 //vendo se a pilha ta vazia
 int pilha_vazia(PILHA *p){
-  if(p->topo == MAX_PILHA-1){
+  if(p->topo == -1){
     return 1;
     }else{
     return 0;
@@ -57,7 +57,7 @@ int pilha_cheia(PILHA *p){
 
 //imprime os valores da pilha
 void imprimePilha(PILHA *p){
-  for(int i = (p->topo -1); i >= 0; i--){
+  for(int i = (p->topo); i >= 0; i--){
     printf("%.2d na posicao %d \n", p->pilha[i], i);
   }
 }
