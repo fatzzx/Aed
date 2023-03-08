@@ -15,24 +15,27 @@ void inicializando_pilha (PILHA *p){
 
 
 //Função empilha
-void empilha(int valor, PILHA *p){
+int empilha(int valor, PILHA *p){
   if(p->topo < MAX_PILHA){
       p->topo++;
       p->pilha[p->topo] = valor;
+    return 1;
   }
   else{
-    printf("Nao ha mais espaco na pilha");
+    return 0;
   }
 }
 
 //Função desempilha
-void desempilha(PILHA *p){
+int desempilha(PILHA *p, int *e){
   if(p->topo >= 0){
+    *e = p->pilha[p->topo];
     p->topo--;
-    printf("Elemento retirado: %d\n", p->pilha[p->topo]);
+    printf("Elemento retirado: %d\n", p->pilha[p->topo + 1]);
+    return 1;
   }
   else{
-    printf("A pilha esta vazia");
+    return 0;
   }
 }
 
@@ -55,8 +58,13 @@ int pilha_cheia(PILHA *p){
   }
 }
 
+int tamanho(PILHA *p){
+  return p->topo +1;
+}
+
 //imprime os valores da pilha
 void imprimePilha(PILHA *p){
+  printf("A Pilha possui %d elementos:\n", p->topo+1);
   for(int i = (p->topo); i >= 0; i--){
     printf("%.2d na posicao %d \n", p->pilha[i], i);
   }
