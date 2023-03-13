@@ -89,16 +89,16 @@ void retiraImpares(PILHA *p, PILHA *p2){
 }
 
 //função para comparar pilhas
-int compara_pilhas(PILHA *p1, PILHA *p2) {
-  if (tamanho(p1) != tamanho(p2)) {
+int compara_pilhas(PILHA p1, PILHA p2) {
+  if (tamanho(&p1) != tamanho(&p2)) {
     return 0;
   }
   
   tp_item e1, e2;
   
-  while (!pilha_vazia(p1)) {
-    desempilha(p1, &e1);
-    desempilha(p2, &e2);
+  while (!pilha_vazia(&p1)) {
+    desempilha(&p1, &e1);
+    desempilha(&p2, &e2);
     if (e1 != e2) {
       return 0;
     }
@@ -114,6 +114,19 @@ void empilhaPilhas(PILHA *p, PILHA *p2){
   }
 }
 
+//outra função para empilhar
+int empilha_pilha(PILHA *p, PILHA *p2){
+  if(tamanho(p) + tamanho(p2) > MAX_PILHA){
+    return 0;
+  }
+  while(!pilha_vazia(p2)){
+    empilha(p2->pilha[p2->topo], p);
+    p2->topo--;
+  }
+  return 1;
+}
+
+
 //Outra função de retirar impares pq n sei se a outra esta certa
 void retira_impares(PILHA *p) {
   PILHA aux;
@@ -123,7 +136,7 @@ void retira_impares(PILHA *p) {
   while (!pilha_vazia(p)) {
     desempilha(p, &e);
     if (e % 2 == 0) {
-    empilha(e, &aux); 
+      empilha(e, &aux);
     }
   }
   while (!pilha_vazia(&aux)) {
@@ -131,6 +144,7 @@ void retira_impares(PILHA *p) {
     empilha(e, p);
   }
 }
+
 
 
 #endif
