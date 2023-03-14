@@ -116,13 +116,26 @@ void empilhaPilhas(PILHA *p, PILHA *p2){
 
 //outra função para empilhar
 int empilha_pilha(PILHA *p, PILHA *p2){
+  
+  PILHA aux;
+  tp_item e;
+  inicializando_pilha(&aux);
+  
   if(tamanho(p) + tamanho(p2) > MAX_PILHA){
     return 0;
   }
+  
   while(!pilha_vazia(p2)){
-    empilha(p2->pilha[p2->topo], p);
-    p2->topo--;
+    desempilha(p2, &e);
+    empilha(e, &aux);
   }
+  
+  while(!pilha_vazia(&aux)){
+    desempilha(&aux, &e);
+    empilha(e, p);
+  }
+  
+  
   return 1;
 }
 
@@ -131,6 +144,7 @@ int empilha_pilha(PILHA *p, PILHA *p2){
 void retira_impares(PILHA *p) {
   PILHA aux;
   tp_item e;
+  
   inicializando_pilha(&aux);
   
   while (!pilha_vazia(p)) {
@@ -139,6 +153,7 @@ void retira_impares(PILHA *p) {
       empilha(e, &aux);
     }
   }
+  
   while (!pilha_vazia(&aux)) {
     desempilha(&aux, &e);
     empilha(e, p);
